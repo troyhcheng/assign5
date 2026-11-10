@@ -27,6 +27,16 @@ print(f"Monthly Sharpe Ratio: {monthly_sharpe_ratio:.3f}")
 
 
 
+import streamlit as st
+# Fetches 5 years of AAPL data and prints the final overall average closing price.
+st.title("AAPL 5-Year Average Stock Price")
+# Fetch 5 years of historical data for AAPL
+data = yf.Ticker("AAPL").history(period="5y")
+if not data.empty:
+ overall_average = data['Close'].mean()
+ st.metric(label="5-Year Average Price", value=f"${overall_average:.2f}")
+else:
+ st.error("No data found for AAPL.")
 
 
 
